@@ -1,0 +1,21 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 6em; /* Preserve space for the footer */
+    font-family: 'Montserrat', sans-serif;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    line-height: 4em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 4em;
+    background-color: #eeeeee;
+    color: #666666;
+}
