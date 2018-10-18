@@ -1,10 +1,6 @@
 $(function() {
     'use strict';
 
-    const jobUrl = 'https://sandbox.gibm.ch/berufe.php';
-    const classUrl = 'https://sandbox.gibm.ch/klassen.php';
-    const timetableUrl = 'http://sandbox.gibm.ch/tafel.php';
-
     const $breadcrumb = $('#breadcrumb');
     const $jobList = $('#job-list');
     const $classList = $('#class-list');
@@ -61,24 +57,23 @@ $(function() {
         e.preventDefault();
         const id = $(this).data('id');
 
-        $.getJSON(classUrl, { beruf_id: id })
+        Fetcher.fetchClasses(id)
             .then(populateClassList)
             .catch(showError);
     }
 
     function onClassSelect(e) {
         e.preventDefault();
-        let id = $(this).data('id');
+        const id = $(this).data('id');
 
-        $.getJSON(timetableUrl, { klasse_id: id })
+        Fetcher.fetchTimetable(id)
             .then(showTable)
             .catch(showError);
     }
 
-    $.getJSON(jobUrl)
+    Fetcher.fetchJobs()
         .then(populateJobList)
         .catch(showError);
-
 
     $classList.hide();
     $timetable.hide();
