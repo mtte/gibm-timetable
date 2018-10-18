@@ -35,7 +35,7 @@ $(function() {
 
             if (data.length === 0) {
                 $classList.append(
-                    `<div href="#" class="list-group-item list-group-item-warning">Keine Klassen verfügbar</div>`);
+                    `<div class="list-group-item list-group-item-warning">Keine Klassen verfügbar</div>`);
             }
 
             for (const classData of data) {
