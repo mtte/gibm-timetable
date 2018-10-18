@@ -20,7 +20,13 @@
         <p class="lead">Der bessere Stundenplan</p>
     </header>
     <main>
-        <div id="breadcrumb"></div>
+        <div class="container mb-4 h4">
+            <!--<span id="breadcrumb-start">Start</span>-->
+            <!--<span>»</span>-->
+            <span id="breadcrumb-job"></span>
+            <span id="breadcrumb-separator">»</span>
+            <span id="breadcrumb-class"></span>
+        </div>
         <!--<div class="input-group my-3">-->
             <!--<input type="text" id="search" class="form-control" placeholder="Suche..." >-->
         <!--</div>-->
@@ -32,8 +38,8 @@
                 <span id="week-year">2018</span>
             </div>
             <div id="table" class="d-flex justify-content-center">
-                <span id="back" class="pagination-button d-flex align-items-center">⟨</span>
-                <table class="container m-0 table table-striped table-bordered text-center">
+                <span id="back" class="pagination-button d-flex align-items-center mr-2 ml-1">⟨</span>
+                <table class="container m-0 table table-striped table-bordered table-responsive text-center">
                     <thead>
                     <tr>
                         <th>Fach</th>
@@ -46,7 +52,7 @@
                     </thead>
                     <tbody id="table-body"></tbody>
                 </table>
-                <span id="next" class="pagination-button d-flex align-items-center">⟩</span>
+                <span id="next" class="pagination-button d-flex align-items-center ml-2 mr-1">⟩</span>
             </div>
         </div>
     </main>
@@ -60,6 +66,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <script src="js/fetcher.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/breadcrumb.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

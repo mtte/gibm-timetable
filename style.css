@@ -29,10 +29,18 @@ body {
     cursor: pointer;
     color: #c3c3c3;
     font-size: 64px;
-    margin: 0.5em;
     transition: color 0.2s;
 }
 
 .pagination-button:hover {
     color: #666666;
+}
+
+.link {
+    color: #d14d14;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
