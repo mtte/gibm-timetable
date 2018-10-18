@@ -28,22 +28,22 @@ $(function() {
     function showTable(data) {
         $classList.slideUp("slow", function() {
             for (const lesson of data) {
-                $timetable
+                // TODO
             }
         });
     }
 
     function showError() {
-
+        console.error('error');
     }
 
     function onJobSelect(e) {
         e.preventDefault();
-        let id = $(this).data('id');
+        const id = $(this).data('id');
 
         $.getJSON(classUrl, { beruf_id: id })
             .then(populateClassList)
-            .fail(showError);
+            .catch(showError);
     }
 
     function onClassSelect(e) {
@@ -52,18 +52,18 @@ $(function() {
 
         $.getJSON(timetableUrl, { klasse_id: id })
             .then(showTable)
-            .fail(showError);
+            .catch(showError);
     }
 
     $.getJSON(jobUrl)
         .then(populateJobList)
-        .fail(showError);
+        .catch(showError);
 
 
     $classList.hide();
     $timetable.hide();
 
     $jobList.on('click', '.job', onJobSelect);
-    $jobList.on('click', '.class', onClassSelect);
+    $classList.on('click', '.class', onClassSelect);
 
 });
