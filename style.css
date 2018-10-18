@@ -3,6 +3,11 @@ html {
     min-height: 100%;
 }
 
+::selection {
+    background-color: #ed4040;
+    color: #fff;
+}
+
 body {
     margin-bottom: 6em; /* Preserve space for the footer */
     font-family: 'Montserrat', sans-serif;
@@ -16,6 +21,18 @@ body {
     bottom: 0;
     width: 100%;
     height: 4em;
-    background-color: #eeeeee;
+    background-color: #e9ecef;
+    color: #666666;
+}
+
+.pagination-button {
+    cursor: pointer;
+    color: #c3c3c3;
+    font-size: 64px;
+    margin: 0.5em;
+    transition: color 0.2s;
+}
+
+.pagination-button:hover {
     color: #666666;
 }
