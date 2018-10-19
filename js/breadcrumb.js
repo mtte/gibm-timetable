@@ -1,7 +1,7 @@
 const Breadcrumb = (function() {
     'use strict';
 
-    const chooseJobMessage = 'Wähle einene Beruf';
+    const chooseJobMessage = 'Wähle einen Beruf';
     const chooseClassMessage = 'Wähle eine Klasse';
 
     const $job = $('#breadcrumb-job');
