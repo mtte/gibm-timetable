@@ -161,5 +161,10 @@ $(function() {
     $jobList.on('click', '.job', onJobSelect);
     $classList.on('click', '.class', onClassSelect);
 
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
+    setupAlerts();
+
     init();
 });
