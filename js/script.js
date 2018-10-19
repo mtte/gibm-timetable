@@ -101,6 +101,7 @@ $(function() {
 
     function showError(error) {
         console.error(error);
+        $('#fetch-alert').addClass('show').fadeIn('fast');
     }
 
     function onJobSelect(event) {
@@ -144,6 +145,13 @@ $(function() {
 
         Breadcrumb.init();
         showJobList();
+    }
+
+    function setupAlerts() {
+        $('#alerts .alert').hide();
+        $('#alerts .alert .close').click(function() {
+            $(this).removeClass('show').parent().fadeOut('fast');
+        });
     }
 
     // Events
