@@ -15,10 +15,10 @@ const Fetcher = (function() {
         });
     };
 
-    const fetchTimetable = function(classId, week = undefined) {
+    const fetchTimetable = function(classId, week, year) {
         return  $.getJSON(timetableUrl, {
             klasse_id: classId,
-            woche: week
+            woche: `${week}-${year}`
         });
     };
 

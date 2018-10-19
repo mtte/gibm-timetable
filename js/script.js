@@ -6,10 +6,10 @@ $(function() {
     const $timetable = $('#timetable');
 
     const view = new View(400, $jobList, $classList, $timetable);
+    const settings = new Settings();
 
     async function showJobList() {
-        // clear local storage as this is the first view
-        localStorage.clear();
+        settings.reset();
 
         let data;
         try {
@@ -34,10 +34,7 @@ $(function() {
     }
 
     async function showClassList(jobId, jobName) {
-        // store selection in local storage
-        localStorage.setItem('job', JSON.stringify({ jobId, jobName }));
-        // remove class selection as we are now selecting a new one
-        localStorage.removeItem('class');
+        settings.job = { jobId, jobName };
 
         let data;
         try {
@@ -69,12 +66,14 @@ $(function() {
     }
 
     async function showTable(classId, className) {
-        // store selection in local storage
-        localStorage.setItem('class', JSON.stringify({ classId, className }));
+        settings.class = { classId, className };
+
+        $('#week-number').text(settings.week);
+        $('#week-year').text(settings.year);
 
         let data;
         try {
-            data = await Fetcher.fetchTimetable(classId);
+            data = await Fetcher.fetchTimetable(classId, settings.week, settings.year);
         } catch (error) {
             showError(error);
             return;
@@ -125,21 +124,18 @@ $(function() {
     }
 
     function init() {
-        const previousJob = JSON.parse(localStorage.getItem('job'));
-        const previousClass = JSON.parse(localStorage.getItem('class'));
-
         // if a previous job is present, pre-select the job
-        if (previousJob) {
-            Breadcrumb.selectJob(previousJob.jobId, previousJob.jobName);
+        if (settings.job) {
+            Breadcrumb.selectJob(settings.job.jobId, settings.job.jobName);
 
-            if (previousClass) {
+            if (settings.class) {
                 // if previous class is present, pre-select the class too
-                Breadcrumb.selectClass(previousClass.classId, previousClass.className);
-                showTable(previousClass.classId, previousClass.className);
+                Breadcrumb.selectClass(settings.class.classId, settings.class.className);
+                showTable(settings.class.classId, settings.class.className);
                 return;
             }
 
-            showClassList(previousJob.jobId, previousJob.jobName);
+            showClassList(settings.job.jobId, settings.job.jobName);
             return;
         }
 
@@ -160,6 +156,15 @@ $(function() {
 
     $jobList.on('click', '.job', onJobSelect);
     $classList.on('click', '.class', onClassSelect);
+
+    $('#next').click(() => {
+        settings.incrementWeek();
+        showTable(settings.class.classId, settings.class.className);
+    });
+    $('#back').click(() => {
+        settings.decrementWeek();
+        showTable(settings.class.classId, settings.class.className);
+    });
 
     // Tooltips
     $('[data-toggle="tooltip"]').tooltip();
