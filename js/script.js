@@ -4,6 +4,7 @@ $(function() {
     const $jobList = $('#job-list');
     const $classList = $('#class-list');
     const $timetable = $('#timetable');
+    const $tableContainer = $('#table-container');
 
     const view = new View(400, $jobList, $classList, $timetable);
     const settings = new Settings();
@@ -49,7 +50,7 @@ $(function() {
         if (data.length === 0) {
             // show info if no data available
             $classList.append(
-                `<div class="list-group-item list-group-item-warning">Keine Klassen verfügbar</div>`);
+                `<div class="list-group-item list-group-item-secondary">Keine Klassen verfügbar</div>`);
         }
 
         for (const classData of data) {
@@ -78,24 +79,16 @@ $(function() {
             showError(error);
             return;
         }
+        
+        $tableContainer.empty();
 
-        const tableBody = $timetable.find('#table-body');
-        tableBody.empty(); // clear before filling with new data
-        for (const lesson of data) {
-            // add a row to the table for each lesson
-            const html = `
-                <tr>
-                    <td>${lesson.tafel_longfach}</td>
-                    <td>${lesson.tafel_datum}</td>
-                    <td>${lesson.tafel_von}</td>
-                    <td>${lesson.tafel_bis}</td>
-                    <td>${lesson.tafel_lehrer}</td>
-                    <td>${lesson.tafel_raum}</td>
-                </tr>`;
-            tableBody.append(html);
-        }
-
+        const timetable = new Timetable(data);
+        const table = timetable.getTable();
+        $tableContainer.append(table);
+        table.hide();
+        
         await view.showView($timetable);
+        table.fadeIn();
     }
 
     function showError(error) {
@@ -157,11 +150,19 @@ $(function() {
     $jobList.on('click', '.job', onJobSelect);
     $classList.on('click', '.class', onClassSelect);
 
-    $('#next').click(() => {
+    $('#next').click(async () => {
+        await $.when($tableContainer.find('.table').animate(
+            { right: $(window).width() },
+            'slow'
+        ));
         settings.incrementWeek();
         showTable(settings.class.classId, settings.class.className);
     });
-    $('#back').click(() => {
+    $('#back').click(async () => {
+        await $.when($tableContainer.find('.table').animate(
+            { left: $(window).width() },
+            'slow'
+        ));
         settings.decrementWeek();
         showTable(settings.class.classId, settings.class.className);
     });

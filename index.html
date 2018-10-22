@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIBM Stundenplan</title>
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -39,31 +40,19 @@
         <div id="job-list" class="list-group container"></div>
         <div id="class-list" class="list-group container"></div>
         <div id="timetable">
-            <div id="week container" class="text-center mb-4">
-                <h3>Woche <span id="week-number">40</span></h3>
+            <div class="text-center mb-4">
+                <p class="h3">Woche <span id="week-number">40</span></p>
                 <span id="week-year">2018</span>
             </div>
-            <div id="table" class="d-flex justify-content-center align-items-center">
+            <div class="d-flex justify-content-center align-items-center">
                 <span id="back" data-toggle="tooltip" data-placement="left" title="Vorherige Woche" class="pagination-button mr-md-5 mr-2 ml-1">⟨</span>
-                <table class="container m-0 p-0 table table-striped table-bordered table-responsive-md text-center">
-                    <thead>
-                    <tr>
-                        <th>Fach</th>
-                        <th>Datum</th>
-                        <th>Von</th>
-                        <th>Bis</th>
-                        <th>Lehrer</th>
-                        <th>Raum</th>
-                    </tr>
-                    </thead>
-                    <tbody id="table-body"></tbody>
-                </table>
+                <div id="table-container" class="container m-0 p-0"></div>
                 <span id="next" data-toggle="tooltip" data-placement="right" title="Nächste Woche" class="pagination-button ml-md-5 ml-2 mr-1">⟩</span>
             </div>
         </div>
     </main>
     <footer id="footer">
-        <span id="">&copy; 2018 Kay Mattern</span>
+        <span>&copy; 2018 Kay Mattern</span>
     </footer>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -76,6 +65,7 @@
     <script src="js/fetcher.js"></script>
     <script src="js/view.js"></script>
     <script src="js/breadcrumb.js"></script>
+    <script src="js/timetable.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

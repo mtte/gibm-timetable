@@ -44,3 +44,12 @@ body {
 .link:hover {
     text-decoration: underline;
 }
+
+#table-container {
+    overflow: hidden;
+}
+
+.table {
+    position: relative;
+    table-layout: fixed;
+}

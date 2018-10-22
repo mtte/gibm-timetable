@@ -24,11 +24,11 @@ class Settings {
     }
 
     incrementWeek() {
-        this._date.setDate(this._date + 7);
+        this._date.setDate(this._date.getDate() + 7);
     }
 
     decrementWeek() {
-        this._date.setDate(this._date - 7);
+        this._date.setDate(this._date.getDate() - 7);
     }
 
     get week() {
