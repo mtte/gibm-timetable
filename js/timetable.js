@@ -51,7 +51,7 @@ class Timetable {
         // Create a <th /> for each day 
         this._days.forEach(day => {
             const head = $('<th />');
-            const date = this._getDateOfDay(day);
+            const date = Timetable._getDateOfDay(day);
 
             // Date
             head.append(date.toLocaleDateString());
@@ -102,9 +102,9 @@ class Timetable {
     _getAllLessons() {
         // For each day create all lessons
         return Array.from(this._days.values()).flatMap(day => {
-            const date = this._getDateOfDay(day);
+            const date = Timetable._getDateOfDay(day);
             // For each lesson create object that contains the date and the html
-            return day.flatMap(lessonData => this._createLesson(lessonData))
+            return day.flatMap(lessonData => Timetable._createLesson(lessonData))
                 .map(lesson => { 
                     return { date: date, html: lesson };
                 });
@@ -117,11 +117,11 @@ class Timetable {
      * @returns {string} A html string.
      * @private
      */
-    _createLesson(lesson) {
+    static _createLesson(lesson) {
         return `
             <td>
                 <strong>${lesson.tafel_longfach}</strong><br>
-                ${this._formatTime(lesson.tafel_von)}-${this._formatTime(lesson.tafel_bis)}<br>
+                ${Timetable._formatTime(lesson.tafel_von)}-${Timetable._formatTime(lesson.tafel_bis)}<br>
                 Lehrer: ${lesson.tafel_lehrer}<br>
                 Raum: ${lesson.tafel_raum}
             </td>`;
