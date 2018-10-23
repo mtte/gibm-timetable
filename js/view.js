@@ -1,7 +1,10 @@
+/**
+ * Handles the displaying of different views.
+ */
 class View {
 
     /**
-     *
+     * Constructor.
      * @param animationSpeed The speed used to play the animations.
      * @param views All view elements.
      */
@@ -10,11 +13,15 @@ class View {
 
         this._elements = views;
 
-        this._elements.forEach(e => {
-            e.hide();
-        });
+        // initially hide all views
+        this._elements.forEach(e => e.hide());
     }
 
+    /**
+     * Shows the given view. Previous views will slide up (hidden) and then this view will slide down (shown).
+     * @param view The view element to show, has to be one of the elements.
+     * @returns {Promise<void>} Resolved when the view is show.
+     */
     async showView(view) {
         if (this._active === view) {
             // return if is already active

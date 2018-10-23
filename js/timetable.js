@@ -1,9 +1,21 @@
+/**
+ * The timetable component.
+ */
 class Timetable {
 
+    /**
+     * Initialized the timetable with the data.
+     * @param data The timetable data.
+     */
     constructor(data) {
         this._days = this._groupBy(data, lesson => lesson.tafel_datum);
     }
 
+    /**
+     * Create the table element.
+     * @returns {jQuery.fn.init|jQuery|HTMLElement} The table.
+     * @private
+     */
     _createTable() {
         const table = $('<table />', {
             class: 'table table-bordered table-responsive-md text-center hide'
@@ -14,14 +26,19 @@ class Timetable {
         tableHead.append(this._createHeaders());
         table.append(tableHead);
 
-        // Rows
+        // Body
         const tableBody = $('<tbody />');
-        this._createRows().forEach(row => tableBody.append(row));
+        tableBody.append(this._createRows());
         table.append(tableBody);
 
         return table;
     }
 
+    /**
+     * Creates a header row with all headers. Each header corresponds to one day of the timetable.
+     * @returns {jQuery.fn.init|jQuery|HTMLElement} The header row.
+     * @private
+     */
     _createHeaders() {
         const headerRow = $('<tr></tr>');
 
@@ -50,6 +67,11 @@ class Timetable {
         return headerRow;
     }
 
+    /**
+     * Create all rows of the table.
+     * @returns {Array} All rows.
+     * @private
+     */
     _createRows() {
         const rows = [];
 
@@ -72,6 +94,11 @@ class Timetable {
         return rows;
     }
 
+    /**
+     * Get all lessons.
+     * @returns {{date, html: string}[]} Array containing the lessons.
+     * @private
+     */
     _getAllLessons() {
         // For each day create all lessons
         return Array.from(this._days.values()).flatMap(day => {
@@ -84,30 +111,50 @@ class Timetable {
         });
     }
 
+    /**
+     * Creates the html for a lesson.
+     * @param lesson The lesson data.
+     * @returns {string} A html string.
+     * @private
+     */
     _createLesson(lesson) {
-        const html = `
+        return `
             <td>
                 <strong>${lesson.tafel_longfach}</strong><br>
                 ${this._formatTime(lesson.tafel_von)}-${this._formatTime(lesson.tafel_bis)}<br>
                 Lehrer: ${lesson.tafel_lehrer}<br>
                 Raum: ${lesson.tafel_raum}
             </td>`;
-
-        return html;
     }
 
-    _formatTime(time) {
+    /**
+     * Formats the time string.
+     * @param time The time string.
+     * @returns {string} The formatted string.
+     * @private
+     */
+    static _formatTime(time) {
         const index = time.lastIndexOf(':');
         return time.substring(0, index);
     }
 
-    _getDateOfDay(day) {
+    /**
+     * Get the date of a day.
+     * @param day The data of the day.
+     * @returns {Date} Returns the date of the day.
+     * @private
+     */
+    static _getDateOfDay(day) {
         // get the first lesson of this day to get the data for the day
         // this data is the same for each lesson of this day
         const firstLesson = day[0];
         return new Date(firstLesson.tafel_datum);
     }
 
+    /**
+     * Returns the html table.
+     * @returns {jQuery.fn.init|jQuery|HTMLElement|*} The table element.
+     */
     getTable() {
         if (!this._table) {
             this._table = this._createTable();
