@@ -3,7 +3,7 @@ const Fetcher = (function() {
 
     const jobUrl = 'https://sandbox.gibm.ch/berufe.php';
     const classUrl = 'https://sandbox.gibm.ch/klassen.php';
-    const timetableUrl = 'http://sandbox.gibm.ch/tafel.php';
+    const timetableUrl = 'https://sandbox.gibm.ch/tafel.php';
 
     /**
      * Fetch all jobs.
